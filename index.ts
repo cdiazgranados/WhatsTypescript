@@ -13,7 +13,7 @@ form.onsubmit = (event) => {
   console.log(formData);
   const text = formData.get('defineword') as string;
   console.log(text);
-  //fetch returns a promise and .then executes when the promise is fulfilled 
+  //fetch returns a promise and .then executes when the promise is fulfilled (by the api)
   //sets data in arrow function
   //data is a response object
   //response object has a method called .json() which returns a promise
@@ -24,8 +24,12 @@ form.onsubmit = (event) => {
       data.json().then(definition =>
          {
           console.log(definition)
+          let defineTitle: HTMLElement = document.getElementById("definitionTitle");
+          defineTitle.innerHTML = text;
           let define: HTMLElement = document.getElementById("definition");
           define.innerHTML = definition[0].meanings[0].definitions[0].definition;
+          // let partOf: HTMLElement = document.getElementById("partOfSpeech");
+          // partOf.innerHTML = definition[0].meanings[0].partOfSpeech;
         })
       });
   

@@ -9,7 +9,7 @@ form.onsubmit = function (event) {
     console.log(formData);
     var text = formData.get('defineword');
     console.log(text);
-    //fetch returns a promise and .then executes when the promise is fulfilled 
+    //fetch returns a promise and .then executes when the promise is fulfilled (by the api)
     //sets data in arrow function
     //data is a response object
     //response object has a method called .json() which returns a promise
@@ -17,8 +17,12 @@ form.onsubmit = function (event) {
     fetch(url + text).then(function (data) {
         data.json().then(function (definition) {
             console.log(definition);
+            var defineTitle = document.getElementById("definitionTitle");
+            defineTitle.innerHTML = text;
             var define = document.getElementById("definition");
             define.innerHTML = definition[0].meanings[0].definitions[0].definition;
+            var partOf = document.getElementById("partOfSpeech");
+            partOf.innerHTML = definition[0].meanings[0].partOfSpeech;
         });
     });
     return false; // prevent reload
